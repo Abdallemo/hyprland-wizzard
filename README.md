@@ -7,11 +7,27 @@
 
 [HyprLand](https://wiki.hyprland.org/Getting-Started/Installation/)
 
-after that you can proceed with the installation
+### install kitty terminal
+- Arch
+```bash
+pacman -S kitty
+```
+
+- Ubunto
+```bash
+sudo apt install kitty -y
+```
+
+- after that you can proceed with the installation 
+- logout of the current session of your distro and do the following 
+
 
 ```bash
+git clone https://github.com/Abdallemo/hyprland-wizzard.git
 
-
-
+cd hyprland-wizzard
+chmod +x setup.sh
+./setup.sh
 ```
+'##FF0000 Please wait for the installation' 
 
