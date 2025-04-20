@@ -44,7 +44,8 @@ packages() {
       luarocks \
       alacritty \
       kitty \
-      stow
+      stow\
+      network-manager-applet
 
     log "Finished apt package installation"
 
@@ -71,7 +72,8 @@ packages() {
       kitty \
       hyprland \
       wofi \
-      waybar
+      waybar\
+      network-manager-applet
 
     log "Finished Pacman package installation"
 
