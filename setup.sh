@@ -55,10 +55,10 @@ packages() {
     log "Starting Pacman package installation"
     if [[ ! command -v yay > /dev/null 2>&1 ]]; then
       sudo pacman -S --needed --noconfirm git base-devel  && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-      
-
     fi
     $sh_pkg \
+      gnome\
+      gnome-extra\
       neovim\
       lsd \
       fzf \
