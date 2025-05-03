@@ -4,7 +4,7 @@ set -e
 # Detect OS
 source /etc/os-release
 dotfiles="dotfiles"
-
+dotfileDirs=( $(ls -d */ | sed 's:/*$::'))
 if [[ "$ID_LIKE" =~ (ubuntu|debian) || "$ID" =~ (ubuntu|debian) ]]; then
     os="ubuntu"
 elif [[ "$ID_LIKE" =~ (arch) || "$ID" =~ (arch) ]]; then
@@ -53,8 +53,13 @@ packages() {
 
   elif [[ "$os" == "arch" ]]; then
     log "Starting Pacman package installation"
+    if [[ ! command -v yay > /dev/null 2>&1 ]]; then
+      sudo pacman -S --needed --noconfirm git base-devel  && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
+      
 
+    fi
     $sh_pkg \
+      neovim\
       lsd \
       fzf \
       plymouth \
@@ -88,7 +93,8 @@ packages() {
       hyprpaper \
       nwg-look \
       catppuccin-gtk-theme-moca \
-      catppuccin-gtk-theme-mocha
+      catppuccin-gtk-theme-mocha \
+      docker-git \
 
     log "Finished AUR (yay) package installation"
   else
@@ -106,7 +112,7 @@ dotfilesChecker() {
 
   if [ -d "$dotfiles" ]; then
     cd "$dotfiles"
-    for dir in hyprpaper backgrounds kitty waybar wofi hyprlock hyprmocha; do
+    for dir in "${dotfileDirs[@]}"; do
       stow "$dir"
     done
   else
