@@ -29,6 +29,7 @@ if [[ "$os" == "arch" ]]; then
 fi
 
 packages() {
+set +e
   if [[ "$os" == "ubuntu" ]]; then
     log "Starting apt package installation"
 
@@ -101,6 +102,7 @@ packages() {
     echo "❌ Unknown or unsupported OS"
     exit 1
   fi
+set -e
 }
 
 dotfilesChecker() {
