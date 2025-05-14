@@ -29,7 +29,6 @@ if [[ "$os" == "arch" ]]; then
 fi
 
 packages() {
-set +e
   if [[ "$os" == "ubuntu" ]]; then
     log "Starting apt package installation"
 
@@ -54,24 +53,12 @@ set +e
 
   elif [[ "$os" == "arch" ]]; then
     log "Starting Pacman package installation"
-    if [[ ! command -v yay > /dev/null 2>&1 ]]; then
-      sudo pacman -S --needed --noconfirm git base-devel  && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
-    fi
     $sh_pkg \
       gnome\
       gnome-extra\
       neovim\
       lsd \
       fzf \
-      plymouth \
-      plymouth-theme-arch-logo \
-      gnome-shell-extension-gpaste \
-      gpaste \
-      gnome-browser-connector \
-      gnome-shell-extension-prefs \
-      gnome-shell-extension-manager \
-      wine \
-      xclip \
       lua \
       luarocks \
       alacritty \
@@ -95,14 +82,12 @@ set +e
       nwg-look \
       catppuccin-gtk-theme-moca \
       catppuccin-gtk-theme-mocha \
-      docker-git \
 
     log "Finished AUR (yay) package installation"
   else
     echo "❌ Unknown or unsupported OS"
     exit 1
   fi
-set -e
 }
 
 dotfilesChecker() {
